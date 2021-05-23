@@ -1,0 +1,167 @@
+server:
+  port: 8087
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/vision?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false
+    username: root
+    password: lovegfm99
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  #  redis:
+  #    host: localhost # Redis服务器地址
+  #    database: 0 # Redis数据库索引（默认为0）
+  #    port: 6379 # Redis服务器连接端口
+  #    password: # Redis服务器连接密码（默认为空）
+  #    expire:
+  #      authCode: 600 # 验证码超期时间 10分钟
+  #      common: 86400 # 24小时
+  #    key:
+  #      prefix:
+  #        authCode: 600
+  #      expire:
+  #        authCode: 600 # 验证码超期时间
+  #    jedis:
+  #      pool:
+  #        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+  #        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  #        max-idle: 8 # 连接池中的最大空闲连接
+  #        min-idle: 0 # 连接池中的最小空闲连接
+  #    timeout: 3000ms # 连接超时时间（毫秒）
+  redis:
+
+    host: 47.100.187.41 # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: 614571  # Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 3000ms # 连接超时时间（毫秒）
+
+a:
+  b: mySecret
+
+# 自定义jwt key
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mySecret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(seconds, 604800 = 7days)
+  tokenHead:   #JWT负载中拿到开头
+
+mybatis:
+  mapper-locations:
+    - classpath:mbg/mapper/*.xml
+    - classpath*:cn/**/mbg/mapper/*.xml
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+redis:
+  host: localhost # Redis服务器地址
+  database: 0 # Redis数据库索引（默认为0）
+  port: 6379 # Redis服务器连接端口
+  password: # Redis服务器连接密码（默认为空）
+  expire:
+    authCode: 600 # 验证码超期时间 10分钟
+    common: 86400 # 24小时
+  key:
+    prefix:
+      authCode: "portal:authCode:"
+    expire:
+      authCode: 600 # 验证码超期时间
+  jedis:
+    pool:
+      max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+  timeout: 3000ms # 连接超时时间（毫秒）
+
+
+  #自定义redisKey
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /druid/**
+      - /actuator/**
+      - /sso/**
+      - /home/**
+      - /user/login
+      - /user/nickName/exist
+      - /user/register
+      - /user/code/*
+      - /user/client/save
+      - /test1
+      - /order/wx/pay/notify/*
+      - /admin/wx/pay/notify/*
+      - /upload/images
+      - /admin/**
+#腾讯云短信配置
+smsconfig:
+  appId: 1400523115
+  appkey: ef119a603c7840cc7a74922e58e73daa
+  smsSign: flik1337网
+  templateid: 961572
+  invalidtime: 600
+  phone-prefix: LOGIN,REGIST,FORGET_PASSWORD,UPDATE_MOBILE,UPDATE_PASSWORD,WX_UN_TYING,UPDATE_NEW_MOBILE
+
+# 阿里云OSS相关配置信息
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com #oss-accelerate.aliyuncs.com # oss对外服务的访问域名
+    accessKeyId: LTAI4GCfqLSQt6XNxB1Lyy1F # 访问身份验证中用到用户标识
+    accessKeySecret: t5atKHAslOTD4IWZw8bk28nKxM5DMS # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName: ziekoo-new # oss的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: http://localhost:8080/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: / # 上传文件夹路径前缀
+
+#极光推送
+jpush:
+  appKey: 955fffeddf405ef3540ccd44
+  masterKey: 063836ded1efaadc35b5702c
+
+qiniu:
+  bucketName: flik1337-blog
+  accessKey: nMED_cospE1W9CYhYBTwP-GI0150Gh8Mhm0vq_Zf
+  secretKey: 0fJs1ntpZygmAkF1gughSU6XXYHJRG0DwEG6_bsv
+
+#微信支付
+wx:
+  pay:
+    appId: wx3061f7f646d3d3fd    #微信公众号或者小程序等的appid
+    mchId: 1570496181 #微信支付商户号
+    #mchKey: 11ffa7af21524b24f78e2c5603a08766 #微信支付商户密钥  32FC453F00D44D09C5B493FB3D673A44
+    mchKey: 32FC453F00D44D09C5B493FB3D673A44
+    #subAppId: #服务商模式下的子商户公众账号ID
+    #subMchId: #服务商模式下的子商户号
+    keyPath: classpath:com/cloudrest/ziekoo/key/apiclient_cert.p12 #F:\ziekoo\apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
