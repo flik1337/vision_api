@@ -6,7 +6,7 @@ import cn.flik1337.vision.dto.SendSmsDto;
 import cn.flik1337.vision.dto.VerifyCodeDto;
 
 public interface SmsService {
-    CommonResult sendSmsCode(SendSmsDto sendSmsDto);
+    void sendSmsCode(SendSmsDto sendSmsDto);
 
     boolean verifyCode(VerifyCodeDto verifyCodeDto);
 }

@@ -7,9 +7,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,6 +56,11 @@ public class RedisServiceImpl implements RedisService {
         return stringRedisTemplate.opsForValue().increment(key,delta);
     }
 
+    @Override
+    public Set<String>  keys(String pattern){
+        return stringRedisTemplate.keys(pattern);
+    }
+
     /**
      * @param key
 	 * @param offset
@@ -96,6 +103,13 @@ public class RedisServiceImpl implements RedisService {
             }
         });
         return count;
+    }
+
+    public Long incr(String key){
+
+        Long increment = new RedisAtomicLong(key,stringRedisTemplate.getConnectionFactory()).getAndIncrement();
+        return increment;
+
     }
 
 }

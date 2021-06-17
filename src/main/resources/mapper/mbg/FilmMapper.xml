@@ -8,14 +8,14 @@
     <result column="off_time" jdbcType="DATE" property="offTime" />
     <result column="director" jdbcType="VARCHAR" property="director" />
     <result column="actor" jdbcType="VARCHAR" property="actor" />
-    <result column="film_type" jdbcType="INTEGER" property="filmType" />
+    <result column="film_type" jdbcType="VARCHAR" property="filmType" />
     <result column="area" jdbcType="VARCHAR" property="area" />
     <result column="producer" jdbcType="VARCHAR" property="producer" />
     <result column="film_length" jdbcType="INTEGER" property="filmLength" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
     <result column="film_status" jdbcType="INTEGER" property="filmStatus" />
     <result column="box_office" jdbcType="DOUBLE" property="boxOffice" />
-    <result column="comment_count" jdbcType="VARCHAR" property="commentCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
     <result column="score" jdbcType="DOUBLE" property="score" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -120,10 +120,10 @@
       introduction, film_status, box_office, 
       comment_count, score)
     values (#{filmName,jdbcType=VARCHAR}, #{releaseTime,jdbcType=DATE}, #{offTime,jdbcType=DATE}, 
-      #{director,jdbcType=VARCHAR}, #{actor,jdbcType=VARCHAR}, #{filmType,jdbcType=INTEGER}, 
+      #{director,jdbcType=VARCHAR}, #{actor,jdbcType=VARCHAR}, #{filmType,jdbcType=VARCHAR}, 
       #{area,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, #{filmLength,jdbcType=INTEGER}, 
       #{introduction,jdbcType=VARCHAR}, #{filmStatus,jdbcType=INTEGER}, #{boxOffice,jdbcType=DOUBLE}, 
-      #{commentCount,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE})
+      #{commentCount,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="cn.flik1337.vision.mbg.model.Film">
     <selectKey keyProperty="filmId" order="AFTER" resultType="java.lang.Integer">
@@ -191,7 +191,7 @@
         #{actor,jdbcType=VARCHAR},
       </if>
       <if test="filmType != null">
-        #{filmType,jdbcType=INTEGER},
+        #{filmType,jdbcType=VARCHAR},
       </if>
       <if test="area != null">
         #{area,jdbcType=VARCHAR},
@@ -212,7 +212,7 @@
         #{boxOffice,jdbcType=DOUBLE},
       </if>
       <if test="commentCount != null">
-        #{commentCount,jdbcType=VARCHAR},
+        #{commentCount,jdbcType=INTEGER},
       </if>
       <if test="score != null">
         #{score,jdbcType=DOUBLE},
@@ -247,7 +247,7 @@
         actor = #{record.actor,jdbcType=VARCHAR},
       </if>
       <if test="record.filmType != null">
-        film_type = #{record.filmType,jdbcType=INTEGER},
+        film_type = #{record.filmType,jdbcType=VARCHAR},
       </if>
       <if test="record.area != null">
         area = #{record.area,jdbcType=VARCHAR},
@@ -268,7 +268,7 @@
         box_office = #{record.boxOffice,jdbcType=DOUBLE},
       </if>
       <if test="record.commentCount != null">
-        comment_count = #{record.commentCount,jdbcType=VARCHAR},
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
       </if>
       <if test="record.score != null">
         score = #{record.score,jdbcType=DOUBLE},
@@ -286,14 +286,14 @@
       off_time = #{record.offTime,jdbcType=DATE},
       director = #{record.director,jdbcType=VARCHAR},
       actor = #{record.actor,jdbcType=VARCHAR},
-      film_type = #{record.filmType,jdbcType=INTEGER},
+      film_type = #{record.filmType,jdbcType=VARCHAR},
       area = #{record.area,jdbcType=VARCHAR},
       producer = #{record.producer,jdbcType=VARCHAR},
       film_length = #{record.filmLength,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=VARCHAR},
       film_status = #{record.filmStatus,jdbcType=INTEGER},
       box_office = #{record.boxOffice,jdbcType=DOUBLE},
-      comment_count = #{record.commentCount,jdbcType=VARCHAR},
+      comment_count = #{record.commentCount,jdbcType=INTEGER},
       score = #{record.score,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -318,7 +318,7 @@
         actor = #{actor,jdbcType=VARCHAR},
       </if>
       <if test="filmType != null">
-        film_type = #{filmType,jdbcType=INTEGER},
+        film_type = #{filmType,jdbcType=VARCHAR},
       </if>
       <if test="area != null">
         area = #{area,jdbcType=VARCHAR},
@@ -339,7 +339,7 @@
         box_office = #{boxOffice,jdbcType=DOUBLE},
       </if>
       <if test="commentCount != null">
-        comment_count = #{commentCount,jdbcType=VARCHAR},
+        comment_count = #{commentCount,jdbcType=INTEGER},
       </if>
       <if test="score != null">
         score = #{score,jdbcType=DOUBLE},
@@ -354,14 +354,14 @@
       off_time = #{offTime,jdbcType=DATE},
       director = #{director,jdbcType=VARCHAR},
       actor = #{actor,jdbcType=VARCHAR},
-      film_type = #{filmType,jdbcType=INTEGER},
+      film_type = #{filmType,jdbcType=VARCHAR},
       area = #{area,jdbcType=VARCHAR},
       producer = #{producer,jdbcType=VARCHAR},
       film_length = #{filmLength,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=VARCHAR},
       film_status = #{filmStatus,jdbcType=INTEGER},
       box_office = #{boxOffice,jdbcType=DOUBLE},
-      comment_count = #{commentCount,jdbcType=VARCHAR},
+      comment_count = #{commentCount,jdbcType=INTEGER},
       score = #{score,jdbcType=DOUBLE}
     where film_id = #{filmId,jdbcType=INTEGER}
   </update>

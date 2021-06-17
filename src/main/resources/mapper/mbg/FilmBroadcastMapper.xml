@@ -6,7 +6,7 @@
     <result column="film_id" jdbcType="INTEGER" property="filmId" />
     <result column="film_poster" jdbcType="VARCHAR" property="filmPoster" />
     <result column="film_video" jdbcType="VARCHAR" property="filmVideo" />
-    <result column="remian" jdbcType="INTEGER" property="remian" />
+    <result column="film_stage" jdbcType="VARCHAR" property="filmStage" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    film_broadcast_id, film_id, film_poster, film_video, remian
+    film_broadcast_id, film_id, film_poster, film_video, film_stage
   </sql>
   <select id="selectByExample" parameterType="cn.flik1337.vision.mbg.model.FilmBroadcastExample" resultMap="BaseResultMap">
     select
@@ -104,9 +104,9 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into film_broadcast (film_id, film_poster, film_video, 
-      remian)
+      film_stage)
     values (#{filmId,jdbcType=INTEGER}, #{filmPoster,jdbcType=VARCHAR}, #{filmVideo,jdbcType=VARCHAR}, 
-      #{remian,jdbcType=INTEGER})
+      #{filmStage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.flik1337.vision.mbg.model.FilmBroadcast">
     <selectKey keyProperty="filmBroadcastId" order="AFTER" resultType="java.lang.Integer">
@@ -123,8 +123,8 @@
       <if test="filmVideo != null">
         film_video,
       </if>
-      <if test="remian != null">
-        remian,
+      <if test="filmStage != null">
+        film_stage,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,8 +137,8 @@
       <if test="filmVideo != null">
         #{filmVideo,jdbcType=VARCHAR},
       </if>
-      <if test="remian != null">
-        #{remian,jdbcType=INTEGER},
+      <if test="filmStage != null">
+        #{filmStage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -163,8 +163,8 @@
       <if test="record.filmVideo != null">
         film_video = #{record.filmVideo,jdbcType=VARCHAR},
       </if>
-      <if test="record.remian != null">
-        remian = #{record.remian,jdbcType=INTEGER},
+      <if test="record.filmStage != null">
+        film_stage = #{record.filmStage,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -177,7 +177,7 @@
       film_id = #{record.filmId,jdbcType=INTEGER},
       film_poster = #{record.filmPoster,jdbcType=VARCHAR},
       film_video = #{record.filmVideo,jdbcType=VARCHAR},
-      remian = #{record.remian,jdbcType=INTEGER}
+      film_stage = #{record.filmStage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,8 +194,8 @@
       <if test="filmVideo != null">
         film_video = #{filmVideo,jdbcType=VARCHAR},
       </if>
-      <if test="remian != null">
-        remian = #{remian,jdbcType=INTEGER},
+      <if test="filmStage != null">
+        film_stage = #{filmStage,jdbcType=VARCHAR},
       </if>
     </set>
     where film_broadcast_id = #{filmBroadcastId,jdbcType=INTEGER}
@@ -205,7 +205,7 @@
     set film_id = #{filmId,jdbcType=INTEGER},
       film_poster = #{filmPoster,jdbcType=VARCHAR},
       film_video = #{filmVideo,jdbcType=VARCHAR},
-      remian = #{remian,jdbcType=INTEGER}
+      film_stage = #{filmStage,jdbcType=VARCHAR}
     where film_broadcast_id = #{filmBroadcastId,jdbcType=INTEGER}
   </update>
 </mapper>

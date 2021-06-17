@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@MapperScan("cn.flik1337.vision.mbg.mapper")
+@MapperScan(value = {"cn.flik1337.vision.mbg.mapper","cn.flik1337.vision.dao","cn.flik1337.vision.mapper"})
 public class VisionApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

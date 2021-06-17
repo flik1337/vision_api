@@ -22,7 +22,7 @@ import java.io.IOException;
 * @Date: 2021/5/19 09:25:09
 */
 @Component
-public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class MyRestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Autowired
     private ObjectMapper objectMapper;
     @Override

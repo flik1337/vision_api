@@ -36,6 +36,7 @@ public class CommentGenerator  extends DefaultCommentGenerator {
         //根据参数和备注信息判断是否添加备注信息
         if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
             addFieldJavaDoc(field, remarks);
+            //field.addJavaDocLine("@ApiModelProperty(value = \""+remarks+"\")");
         }
     }
 

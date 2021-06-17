@@ -1,9 +1,11 @@
 package cn.flik1337.vision.service;
 
+import java.util.Set;
+
 /**
  * @Description redis操作Service,
  * @Author flik
- * @Date 2020/7/29 20:10
+ * @Date 2020/5/26 20:10
  * @Version 1.0
  */
 public interface RedisService {
@@ -41,4 +43,5 @@ public interface RedisService {
 
     public Long count(String key);
 
+    public Set<String> keys(String pattern);
 }

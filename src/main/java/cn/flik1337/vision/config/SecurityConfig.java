@@ -3,8 +3,8 @@ package cn.flik1337.vision.config;
 import cn.flik1337.vision.common.utils.JwtTokenUtil;
 
 import cn.flik1337.vision.component.JwtAuthenticationTokenFilter;
-import cn.flik1337.vision.component.RestAuthenticationEntryPoint;
-import cn.flik1337.vision.component.RestfulAccessDeniedHandler;
+import cn.flik1337.vision.component.MyRestAuthenticationEntryPoint;
+import cn.flik1337.vision.component.MyRestfulAccessDeniedHandler;
 
 import cn.flik1337.vision.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,13 +108,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
-        return new RestfulAccessDeniedHandler();
+    public MyRestfulAccessDeniedHandler restfulAccessDeniedHandler() {
+        return new MyRestfulAccessDeniedHandler();
     }
 
     @Bean
-    public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
-        return new RestAuthenticationEntryPoint();
+    public MyRestAuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return new MyRestAuthenticationEntryPoint();
     }
 
     @Bean

@@ -9,6 +9,8 @@
     <result column="cinema_tel" jdbcType="VARCHAR" property="cinemaTel" />
     <result column="lat" jdbcType="VARCHAR" property="lat" />
     <result column="lng" jdbcType="VARCHAR" property="lng" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="special" jdbcType="VARCHAR" property="special" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cinema_id, cinema_name, cinema_address, praise, cinema_tel, lat, lng
+    cinema_id, cinema_name, cinema_address, praise, cinema_tel, lat, lng, city, special
   </sql>
   <select id="selectByExample" parameterType="cn.flik1337.vision.mbg.model.CinemaExample" resultMap="BaseResultMap">
     select
@@ -106,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into cinema (cinema_name, cinema_address, praise, 
-      cinema_tel, lat, lng
-      )
+      cinema_tel, lat, lng, 
+      city, special)
     values (#{cinemaName,jdbcType=VARCHAR}, #{cinemaAddress,jdbcType=VARCHAR}, #{praise,jdbcType=DOUBLE}, 
-      #{cinemaTel,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}
-      )
+      #{cinemaTel,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{special,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.flik1337.vision.mbg.model.Cinema">
     <selectKey keyProperty="cinemaId" order="AFTER" resultType="java.lang.Integer">
@@ -136,6 +138,12 @@
       <if test="lng != null">
         lng,
       </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="special != null">
+        special,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cinemaName != null">
@@ -155,6 +163,12 @@
       </if>
       <if test="lng != null">
         #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="special != null">
+        #{special,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +202,12 @@
       <if test="record.lng != null">
         lng = #{record.lng,jdbcType=VARCHAR},
       </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.special != null">
+        special = #{record.special,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +221,9 @@
       praise = #{record.praise,jdbcType=DOUBLE},
       cinema_tel = #{record.cinemaTel,jdbcType=VARCHAR},
       lat = #{record.lat,jdbcType=VARCHAR},
-      lng = #{record.lng,jdbcType=VARCHAR}
+      lng = #{record.lng,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      special = #{record.special,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +249,12 @@
       <if test="lng != null">
         lng = #{lng,jdbcType=VARCHAR},
       </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="special != null">
+        special = #{special,jdbcType=VARCHAR},
+      </if>
     </set>
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </update>
@@ -237,7 +265,9 @@
       praise = #{praise,jdbcType=DOUBLE},
       cinema_tel = #{cinemaTel,jdbcType=VARCHAR},
       lat = #{lat,jdbcType=VARCHAR},
-      lng = #{lng,jdbcType=VARCHAR}
+      lng = #{lng,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      special = #{special,jdbcType=VARCHAR}
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </update>
 </mapper>

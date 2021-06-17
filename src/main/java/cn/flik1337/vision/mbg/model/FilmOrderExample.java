@@ -1,6 +1,7 @@
 package cn.flik1337.vision.mbg.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FilmOrderExample {
@@ -351,6 +352,186 @@ public class FilmOrderExample {
 
         public Criteria andFilmScheduleIdNotBetween(Integer value1, Integer value2) {
             addCriterion("film_schedule_id not between", value1, value2, "filmScheduleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusIsNull() {
+            addCriterion("pay_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusIsNotNull() {
+            addCriterion("pay_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusEqualTo(Integer value) {
+            addCriterion("pay_status =", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusNotEqualTo(Integer value) {
+            addCriterion("pay_status <>", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusGreaterThan(Integer value) {
+            addCriterion("pay_status >", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pay_status >=", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusLessThan(Integer value) {
+            addCriterion("pay_status <", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("pay_status <=", value, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusIn(List<Integer> values) {
+            addCriterion("pay_status in", values, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusNotIn(List<Integer> values) {
+            addCriterion("pay_status not in", values, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusBetween(Integer value1, Integer value2) {
+            addCriterion("pay_status between", value1, value2, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("pay_status not between", value1, value2, "payStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusIsNull() {
+            addCriterion("fetch_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusIsNotNull() {
+            addCriterion("fetch_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusEqualTo(Integer value) {
+            addCriterion("fetch_status =", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusNotEqualTo(Integer value) {
+            addCriterion("fetch_status <>", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusGreaterThan(Integer value) {
+            addCriterion("fetch_status >", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("fetch_status >=", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusLessThan(Integer value) {
+            addCriterion("fetch_status <", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("fetch_status <=", value, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusIn(List<Integer> values) {
+            addCriterion("fetch_status in", values, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusNotIn(List<Integer> values) {
+            addCriterion("fetch_status not in", values, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusBetween(Integer value1, Integer value2) {
+            addCriterion("fetch_status between", value1, value2, "fetchStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andFetchStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("fetch_status not between", value1, value2, "fetchStatus");
             return (Criteria) this;
         }
     }

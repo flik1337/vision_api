@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -20,29 +22,33 @@ public class UserController {
     private UserService userService;
     @Autowired
     private OssService ossService;
-
+    /**
+    * @Description: 发送验证码
+    * @Param: 
+    * @Date: 2021/5/24 10:00:37
+    */
     @RequestMapping(value = "sms",method = RequestMethod.POST)
     public CommonResult sendSms(@RequestBody SendSmsDto sendSmsDto){
 
-       return smsService.sendSmsCode(sendSmsDto);
+       smsService.sendSmsCode(sendSmsDto);
+       return CommonResult.success();
 
     }
-
-    @RequestMapping(value = "login/sms",method = RequestMethod.GET)
-    public CommonResult loginByCode(@ModelAttribute VerifyCodeDto verifyCodeDto){
-
-        return userService.loginByCode(verifyCodeDto);
-
-    }
+    
     @RequestMapping(value = "avatar",method = RequestMethod.POST)
     public CommonResult loginByCode(MultipartFile file){
+        String newFileName = ossService.uploadSingleFile(file);
+        return CommonResult.success(newFileName);
 
-        return ossService.uploadSingleFile(file);
+
 
     }
     @RequestMapping(value = "/loginOrRegister",method = RequestMethod.POST)
     public CommonResult loginOrRegister(@RequestBody VerifyCodeDto verifyCodeDto){
-        return userService.loginOrRegister(verifyCodeDto);
+        Map<String,Object> userInfo = userService.loginOrRegister(verifyCodeDto);
+        return CommonResult.success(userInfo);
+
+
     }
 
 }

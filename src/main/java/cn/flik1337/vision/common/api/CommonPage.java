@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 分页数据封装类
- * Created by macro on 2019/4/19.
+ * Created by flik on 2020/4/19.
  */
 public class CommonPage<T> {
     private Integer pageNum;
@@ -43,6 +43,7 @@ public class CommonPage<T> {
         result.setPageNum(pageInfo.getNumber());
         result.setPageSize(pageInfo.getSize());
         result.setTotal(pageInfo.getTotalElements());
+        result.setLastPage(pageInfo.isLast());
         result.setList(pageInfo.getContent());
         return result;
     }

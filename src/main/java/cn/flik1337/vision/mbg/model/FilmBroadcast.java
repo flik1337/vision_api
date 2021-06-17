@@ -11,7 +11,7 @@ public class FilmBroadcast implements Serializable {
 
     private String filmVideo;
 
-    private Integer remian;
+    private String filmStage;
 
     private static final long serialVersionUID = 1L;
 
@@ -47,12 +47,12 @@ public class FilmBroadcast implements Serializable {
         this.filmVideo = filmVideo;
     }
 
-    public Integer getRemian() {
-        return remian;
+    public String getFilmStage() {
+        return filmStage;
     }
 
-    public void setRemian(Integer remian) {
-        this.remian = remian;
+    public void setFilmStage(String filmStage) {
+        this.filmStage = filmStage;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FilmBroadcast implements Serializable {
         sb.append(", filmId=").append(filmId);
         sb.append(", filmPoster=").append(filmPoster);
         sb.append(", filmVideo=").append(filmVideo);
-        sb.append(", remian=").append(remian);
+        sb.append(", filmStage=").append(filmStage);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

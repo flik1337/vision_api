@@ -364,63 +364,73 @@ public class FilmBroadcastExample {
             return (Criteria) this;
         }
 
-        public Criteria andRemianIsNull() {
-            addCriterion("remian is null");
+        public Criteria andFilmStageIsNull() {
+            addCriterion("film_stage is null");
             return (Criteria) this;
         }
 
-        public Criteria andRemianIsNotNull() {
-            addCriterion("remian is not null");
+        public Criteria andFilmStageIsNotNull() {
+            addCriterion("film_stage is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRemianEqualTo(Integer value) {
-            addCriterion("remian =", value, "remian");
+        public Criteria andFilmStageEqualTo(String value) {
+            addCriterion("film_stage =", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNotEqualTo(Integer value) {
-            addCriterion("remian <>", value, "remian");
+        public Criteria andFilmStageNotEqualTo(String value) {
+            addCriterion("film_stage <>", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianGreaterThan(Integer value) {
-            addCriterion("remian >", value, "remian");
+        public Criteria andFilmStageGreaterThan(String value) {
+            addCriterion("film_stage >", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianGreaterThanOrEqualTo(Integer value) {
-            addCriterion("remian >=", value, "remian");
+        public Criteria andFilmStageGreaterThanOrEqualTo(String value) {
+            addCriterion("film_stage >=", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianLessThan(Integer value) {
-            addCriterion("remian <", value, "remian");
+        public Criteria andFilmStageLessThan(String value) {
+            addCriterion("film_stage <", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianLessThanOrEqualTo(Integer value) {
-            addCriterion("remian <=", value, "remian");
+        public Criteria andFilmStageLessThanOrEqualTo(String value) {
+            addCriterion("film_stage <=", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianIn(List<Integer> values) {
-            addCriterion("remian in", values, "remian");
+        public Criteria andFilmStageLike(String value) {
+            addCriterion("film_stage like", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNotIn(List<Integer> values) {
-            addCriterion("remian not in", values, "remian");
+        public Criteria andFilmStageNotLike(String value) {
+            addCriterion("film_stage not like", value, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianBetween(Integer value1, Integer value2) {
-            addCriterion("remian between", value1, value2, "remian");
+        public Criteria andFilmStageIn(List<String> values) {
+            addCriterion("film_stage in", values, "filmStage");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNotBetween(Integer value1, Integer value2) {
-            addCriterion("remian not between", value1, value2, "remian");
+        public Criteria andFilmStageNotIn(List<String> values) {
+            addCriterion("film_stage not in", values, "filmStage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilmStageBetween(String value1, String value2) {
+            addCriterion("film_stage between", value1, value2, "filmStage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilmStageNotBetween(String value1, String value2) {
+            addCriterion("film_stage not between", value1, value2, "filmStage");
             return (Criteria) this;
         }
     }

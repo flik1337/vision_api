@@ -33,34 +33,47 @@
         <!--指定生成model的路径-->
         <javaModelGenerator targetPackage="cn.flik1337.vision.mbg.model" targetProject="src/main/java"/>
         <!--指定生成mapper.xml的路径-->
-        <sqlMapGenerator targetPackage="mbg.mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper.mbg" targetProject="src/main/resources"/>
         <!--指定生成mapper接口的的路径-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="cn.flik1337.vision.mbg.mapper"
                              targetProject="src/main/java"/>
+
         <!-- %-->
-        <table tableName="cinema">
-            <generatedKey column="cinema_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="film">
-            <generatedKey column="film_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="film_broadcast">
-            <generatedKey column="film_broadcast_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="film_order">
-            <generatedKey column="film_order_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="film_schedule">
-            <generatedKey column="film_schedule_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="hall">
-            <generatedKey column="hall_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ticket">
-            <generatedKey column="ticket_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="user">
-            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--            <table tableName="film_order">-->
+
+<!--            </table>-->
+<!--        <table tableName="cinema">-->
+<!--            <generatedKey column="cinema_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="cinema_spec">-->
+<!--            <generatedKey column="cinema_spec_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="film_type">-->
+<!--            <generatedKey column="film_type_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="film">-->
+<!--            <generatedKey column="film_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="film_broadcast">-->
+<!--            <generatedKey column="film_broadcast_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="film_order">-->
+<!--            -->
+<!--        </table>-->
+<!--        <table tableName="film_schedule">-->
+<!--            <generatedKey column="film_schedule_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="film_comment">-->
+<!--            <generatedKey column="film_comment_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="hall">-->
+<!--            <generatedKey column="hall_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ticket">-->
+<!--            <generatedKey column="ticket_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="user">-->
+<!--            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>

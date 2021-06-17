@@ -5,9 +5,12 @@
     <id column="film_schedule_id" jdbcType="INTEGER" property="filmScheduleId" />
     <result column="film_id" jdbcType="INTEGER" property="filmId" />
     <result column="hall_id" jdbcType="INTEGER" property="hallId" />
-    <result column="schedule_date" jdbcType="DATE" property="scheduleDate" />
-    <result column="schedule_time" jdbcType="TIME" property="scheduleTime" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="schedule_date" jdbcType="TIMESTAMP" property="scheduleDate" />
+    <result column="schedule_time" jdbcType="INTEGER" property="scheduleTime" />
     <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="schedule_type" jdbcType="VARCHAR" property="scheduleType" />
+    <result column="film_schedule_status" jdbcType="INTEGER" property="filmScheduleStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    film_schedule_id, film_id, hall_id, schedule_date, schedule_time, price
+    film_schedule_id, film_id, hall_id, cinema_id, schedule_date, schedule_time, price, 
+    schedule_type, film_schedule_status
   </sql>
   <select id="selectByExample" parameterType="cn.flik1337.vision.mbg.model.FilmScheduleExample" resultMap="BaseResultMap">
     select
@@ -104,10 +108,12 @@
     <selectKey keyProperty="filmScheduleId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into film_schedule (film_id, hall_id, schedule_date, 
-      schedule_time, price)
-    values (#{filmId,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, #{scheduleDate,jdbcType=DATE}, 
-      #{scheduleTime,jdbcType=TIME}, #{price,jdbcType=INTEGER})
+    insert into film_schedule (film_id, hall_id, cinema_id, 
+      schedule_date, schedule_time, price, 
+      schedule_type, film_schedule_status)
+    values (#{filmId,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, 
+      #{scheduleDate,jdbcType=TIMESTAMP}, #{scheduleTime,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
+      #{scheduleType,jdbcType=VARCHAR}, #{filmScheduleStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.flik1337.vision.mbg.model.FilmSchedule">
     <selectKey keyProperty="filmScheduleId" order="AFTER" resultType="java.lang.Integer">
@@ -121,6 +127,9 @@
       <if test="hallId != null">
         hall_id,
       </if>
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
       <if test="scheduleDate != null">
         schedule_date,
       </if>
@@ -130,6 +139,12 @@
       <if test="price != null">
         price,
       </if>
+      <if test="scheduleType != null">
+        schedule_type,
+      </if>
+      <if test="filmScheduleStatus != null">
+        film_schedule_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="filmId != null">
@@ -138,14 +153,23 @@
       <if test="hallId != null">
         #{hallId,jdbcType=INTEGER},
       </if>
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
       <if test="scheduleDate != null">
-        #{scheduleDate,jdbcType=DATE},
+        #{scheduleDate,jdbcType=TIMESTAMP},
       </if>
       <if test="scheduleTime != null">
-        #{scheduleTime,jdbcType=TIME},
+        #{scheduleTime,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         #{price,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleType != null">
+        #{scheduleType,jdbcType=VARCHAR},
+      </if>
+      <if test="filmScheduleStatus != null">
+        #{filmScheduleStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -167,14 +191,23 @@
       <if test="record.hallId != null">
         hall_id = #{record.hallId,jdbcType=INTEGER},
       </if>
+      <if test="record.cinemaId != null">
+        cinema_id = #{record.cinemaId,jdbcType=INTEGER},
+      </if>
       <if test="record.scheduleDate != null">
-        schedule_date = #{record.scheduleDate,jdbcType=DATE},
+        schedule_date = #{record.scheduleDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.scheduleTime != null">
-        schedule_time = #{record.scheduleTime,jdbcType=TIME},
+        schedule_time = #{record.scheduleTime,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.scheduleType != null">
+        schedule_type = #{record.scheduleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filmScheduleStatus != null">
+        film_schedule_status = #{record.filmScheduleStatus,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -186,9 +219,12 @@
     set film_schedule_id = #{record.filmScheduleId,jdbcType=INTEGER},
       film_id = #{record.filmId,jdbcType=INTEGER},
       hall_id = #{record.hallId,jdbcType=INTEGER},
-      schedule_date = #{record.scheduleDate,jdbcType=DATE},
-      schedule_time = #{record.scheduleTime,jdbcType=TIME},
-      price = #{record.price,jdbcType=INTEGER}
+      cinema_id = #{record.cinemaId,jdbcType=INTEGER},
+      schedule_date = #{record.scheduleDate,jdbcType=TIMESTAMP},
+      schedule_time = #{record.scheduleTime,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      schedule_type = #{record.scheduleType,jdbcType=VARCHAR},
+      film_schedule_status = #{record.filmScheduleStatus,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -202,14 +238,23 @@
       <if test="hallId != null">
         hall_id = #{hallId,jdbcType=INTEGER},
       </if>
+      <if test="cinemaId != null">
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
       <if test="scheduleDate != null">
-        schedule_date = #{scheduleDate,jdbcType=DATE},
+        schedule_date = #{scheduleDate,jdbcType=TIMESTAMP},
       </if>
       <if test="scheduleTime != null">
-        schedule_time = #{scheduleTime,jdbcType=TIME},
+        schedule_time = #{scheduleTime,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleType != null">
+        schedule_type = #{scheduleType,jdbcType=VARCHAR},
+      </if>
+      <if test="filmScheduleStatus != null">
+        film_schedule_status = #{filmScheduleStatus,jdbcType=INTEGER},
       </if>
     </set>
     where film_schedule_id = #{filmScheduleId,jdbcType=INTEGER}
@@ -218,9 +263,12 @@
     update film_schedule
     set film_id = #{filmId,jdbcType=INTEGER},
       hall_id = #{hallId,jdbcType=INTEGER},
-      schedule_date = #{scheduleDate,jdbcType=DATE},
-      schedule_time = #{scheduleTime,jdbcType=TIME},
-      price = #{price,jdbcType=INTEGER}
+      cinema_id = #{cinemaId,jdbcType=INTEGER},
+      schedule_date = #{scheduleDate,jdbcType=TIMESTAMP},
+      schedule_time = #{scheduleTime,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      schedule_type = #{scheduleType,jdbcType=VARCHAR},
+      film_schedule_status = #{filmScheduleStatus,jdbcType=INTEGER}
     where film_schedule_id = #{filmScheduleId,jdbcType=INTEGER}
   </update>
 </mapper>

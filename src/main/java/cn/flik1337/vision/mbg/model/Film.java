@@ -1,5 +1,8 @@
 package cn.flik1337.vision.mbg.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,16 +10,18 @@ public class Film implements Serializable {
     private Integer filmId;
 
     private String filmName;
-
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseTime;
-
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date offTime;
 
     private String director;
 
     private String actor;
 
-    private Integer filmType;
+    private String filmType;
 
     private String area;
 
@@ -30,7 +35,7 @@ public class Film implements Serializable {
 
     private Double boxOffice;
 
-    private String commentCount;
+    private Integer commentCount;
 
     private Double score;
 
@@ -84,11 +89,11 @@ public class Film implements Serializable {
         this.actor = actor;
     }
 
-    public Integer getFilmType() {
+    public String getFilmType() {
         return filmType;
     }
 
-    public void setFilmType(Integer filmType) {
+    public void setFilmType(String filmType) {
         this.filmType = filmType;
     }
 
@@ -140,11 +145,11 @@ public class Film implements Serializable {
         this.boxOffice = boxOffice;
     }
 
-    public String getCommentCount() {
+    public Integer getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(String commentCount) {
+    public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
     }
 

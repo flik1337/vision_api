@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.flik1337.vision.dao.FilmScheduleDao">
+    <resultMap id="BaseResultMap" type="cn.flik1337.vision.mbg.model.Cinema">
+        <id column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+        <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName" />
+        <result column="cinema_address" jdbcType="VARCHAR" property="cinemaAddress" />
+        <result column="praise" jdbcType="DOUBLE" property="praise" />
+        <result column="cinema_tel" jdbcType="VARCHAR" property="cinemaTel" />
+        <result column="lat" jdbcType="VARCHAR" property="lat" />
+        <result column="lng" jdbcType="VARCHAR" property="lng" />
+    </resultMap>
+    <resultMap id="cinemaScheduleMap" type="cn.flik1337.vision.vo.CinemaFilmScheduleVo">
+        <id column="film_id" jdbcType="INTEGER" property="filmVo.film.filmId" />
+        <association column="film_id"  javaType="cn.flik1337.vision.vo.FilmVo"
+                     property="filmVo">
+        </association>
+        <collection property="filmScheduleVoList"  resultMap="scheduleMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="scheduleMap" type="cn.flik1337.vision.vo.FilmScheduleVo">
+        <id column="film_schedule_id" jdbcType="INTEGER" property="filmSchedule.filmScheduleId" />
+        <association javaType="cn.flik1337.vision.mbg.model.FilmSchedule"
+                     property="filmSchedule"
+                     resultMap="cn.flik1337.vision.mbg.mapper.FilmScheduleMapper.BaseResultMap"/>
+        <association javaType="cn.flik1337.vision.mbg.model.Hall"
+                     property="hall"
+                     resultMap="cn.flik1337.vision.mbg.mapper.HallMapper.BaseResultMap"/>
+    </resultMap>
+    <update id="updateScheduleStatus">
+        update film_schedule
+        set film_schedule_status = 1
+        where film_schedule_id = #{scheduleId}
+    </update>
+
+    <select id="getFilmScheduleById" resultMap="scheduleMap">
+        select fs.*, hl.* from (film_schedule as fs, hall as hl)
+        where fs.hall_id = hl.hall_id
+        and fs.film_schedule_id = #{filmScheduleId}
+    </select>
+
+
+    <select id="queryScheduleByCinemaAndFilm"   resultMap="scheduleMap">
+        select fs.*, hl.* from (film_schedule as fs, hall as hl)
+        where fs.hall_id = hl.hall_id
+        and fs.film_id = #{filmId}
+        and hl.cinema_id = #{cinemaId}
+    </select>
+
+    <select id="getHallByScheduleId" resultMap="cn.flik1337.vision.mbg.mapper.HallMapper.BaseResultMap">
+        select hall.*  from hall
+        where hall.hall_id = (select hall_id from film_schedule where film_schedule_id = #{scheduleId})
+    </select>
+
+    <select id="getSchedulePrice" resultType="java.lang.Integer">
+        select price from film_schedule
+        where film_schedule_id = #{scheduleId}
+    </select>
+
+    <select id="queryScheduleByIds" resultMap="scheduleMap" >
+        select  film_schedule.*,hall.* from film_schedule
+        left JOIN hall  on  hall.hall_id = film_schedule.hall_id
+        where film_schedule.film_schedule_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        order by schedule_date
+    </select>
+
+
+
+
+</mapper>

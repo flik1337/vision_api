@@ -85,14 +85,14 @@ public class SmsServiceImpl implements SmsService {
 
 
     @Override
-    public CommonResult sendSmsCode(SendSmsDto sendSmsDto) {
+    public void sendSmsCode(SendSmsDto sendSmsDto) {
 
         String code = SmsUtil.getCode();
         Integer templateId = TEMPLATE_ID;
         Integer type = sendSmsDto.getType();
         if(templateId == null){
+            Asserts.fail(BODY_NOT_MATCH);
 
-            return CommonResult.failed(resultCode.BODY_NOT_MATCH);
         }
         try {
             String[] params = {code,DURATION};
@@ -123,7 +123,7 @@ public class SmsServiceImpl implements SmsService {
             LOGGER.warn("发送异常:{}", e.getMessage());
 
         }
-        return CommonResult.success();
+
     }
 
 

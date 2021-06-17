@@ -17,6 +17,10 @@ public class Cinema implements Serializable {
 
     private String lng;
 
+    private String city;
+
+    private String special;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCinemaId() {
@@ -75,6 +79,22 @@ public class Cinema implements Serializable {
         this.lng = lng;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(String special) {
+        this.special = special;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +108,8 @@ public class Cinema implements Serializable {
         sb.append(", cinemaTel=").append(cinemaTel);
         sb.append(", lat=").append(lat);
         sb.append(", lng=").append(lng);
+        sb.append(", city=").append(city);
+        sb.append(", special=").append(special);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

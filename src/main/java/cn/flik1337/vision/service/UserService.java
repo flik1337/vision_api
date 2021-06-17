@@ -11,11 +11,11 @@ import java.util.Map;
 public interface UserService {
     public User getUserById(int id);
     public UserDetails loadUserByUsername(int param);
-    public CommonResult loginByCode(VerifyCodeDto param);
+    public Map<String,Object> loginByCode(VerifyCodeDto params,User currentUser);
     public User getCurrentUser();
     public Map<String,Object> generateUserInfo(User user);
     public User initUserProfile(String phone);
-    public CommonResult register(VerifyCodeDto params);
-    public CommonResult loginOrRegister(VerifyCodeDto params);
+    public Map<String,Object> register(VerifyCodeDto params);
+    public Map<String,Object> loginOrRegister(VerifyCodeDto params);
     public List<User> getUserByPhone(String phone);
 }

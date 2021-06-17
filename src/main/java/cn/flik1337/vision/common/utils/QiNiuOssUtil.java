@@ -71,17 +71,22 @@ public class QiNiuOssUtil {
                 System.out.println(putRet.hash);
                 return true;
             } catch (QiniuException ex) {
+
                 Response r = ex.response;
                 System.err.println(r.toString());
+                Asserts.fail(r.toString());
                 try {
                     System.err.println(r.bodyString());
                 } catch (QiniuException ex2) {
                     //ignore
+                    Asserts.fail(ex2.response.toString());
                 }
             }
         } catch (IOException ex ) {
             //ignore
+            Asserts.fail(ex.toString());
         }
+        Asserts.fail("上传失败");
         return false;
     }
 

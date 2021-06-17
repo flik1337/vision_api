@@ -3,6 +3,7 @@ package cn.flik1337.vision.service.impl;
 import cn.flik1337.vision.common.api.CommonResult;
 import cn.flik1337.vision.common.api.ResultCode;
 import cn.flik1337.vision.common.exception.ApiException;
+import cn.flik1337.vision.common.exception.Asserts;
 import cn.flik1337.vision.common.utils.JwtTokenUtil;
 import cn.flik1337.vision.common.utils.RandomsUtil;
 import cn.flik1337.vision.domain.FUserDetails;
@@ -68,6 +69,7 @@ public class UserServiceImpl implements UserService {
         FUserDetails userDetails = (FUserDetails) auth.getPrincipal();
         return userDetails.getUser();
     }
+
     
     @Override
     public UserDetails loadUserByUsername(int userId) {
@@ -82,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public CommonResult loginOrRegister(VerifyCodeDto params){
+    public Map<String,Object> loginOrRegister(VerifyCodeDto params){
         // 检查该手机号是否存在
         List<User> users = getUserByPhone(params.getMobile());
         if (users.size() == 0){
@@ -90,7 +92,7 @@ public class UserServiceImpl implements UserService {
             return register(params);
         }else{
             // 存在，登陆
-            return loginByCode(params);
+            return loginByCode(params,users.get(0));
         }
     }
 
@@ -100,16 +102,19 @@ public class UserServiceImpl implements UserService {
     * @Date: 2021/5/19 08:37:11
     */
     @Override
-    public CommonResult loginByCode(VerifyCodeDto params){
+    public Map<String,Object> loginByCode(VerifyCodeDto params,User currentUser){
         // 校验登陆池中的验证码
         boolean isCodeCorrect = smsService.verifyCode(params);
         if (isCodeCorrect){
-            User currentUser = getCurrentUser();
+
             // 若校验通过，则构造map，存放token和用户信息
             Map<String,Object> userInfoMap = generateUserInfo(currentUser);
-            return CommonResult.success(userInfoMap);
+            return userInfoMap;
+        }else{
+            Asserts.fail(WRONG_CODE);
+            return null;
         }
-        return CommonResult.failed(ResultCode.WRONG_CODE);
+
 
     }
     /**
@@ -150,7 +155,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public CommonResult register(VerifyCodeDto params){
+    public Map<String,Object> register(VerifyCodeDto params){
 
         boolean isCodeCorrect = smsService.verifyCode(params);
         if (isCodeCorrect){
@@ -159,13 +164,14 @@ public class UserServiceImpl implements UserService {
 
             if (userId ==  0){
                 //插入失败
-                CommonResult.failed(FAIL_UPDATE_USER);
+                Asserts.fail(FAIL_UPDATE_USER);
+                return null;
             }
             // 插入成功后,设置用户id
             user.setUserId(userId);
             // 构造用户信息
             Map<String,Object> userMap = generateUserInfo(user);
-            return CommonResult.success(userMap);
+            return userMap;
 
         }
 

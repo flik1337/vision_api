@@ -18,7 +18,7 @@ import java.lang.annotation.Documented;
  * Created by flik on 2020/7/27.
  */
 @Component
-public class RestfulAccessDeniedHandler implements AccessDeniedHandler{
+public class MyRestfulAccessDeniedHandler implements AccessDeniedHandler{
     @Autowired
     private ObjectMapper objectMapper;
     @Override

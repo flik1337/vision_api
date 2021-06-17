@@ -1,6 +1,7 @@
 
 package cn.flik1337.vision.component;
 
+import cn.flik1337.vision.common.exception.Asserts;
 import cn.flik1337.vision.common.utils.JwtTokenUtil;
 
 import cn.flik1337.vision.domain.FUserDetails;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+
+import static cn.flik1337.vision.common.api.ResultCode.FAILED;
 
 
 /**
@@ -46,6 +50,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String authHeader = request.getHeader(this.tokenHeader);
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
@@ -64,5 +69,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+
     }
 }

@@ -13,16 +13,38 @@ import static cn.flik1337.vision.common.api.ResultCode.OSS_WRONG;
 @Service
 @Transactional
 public class OssServiceImpl implements OssService {
-
+    private static String SPLIT = "@";
     @Autowired
     private QiNiuOssUtil ossUtil;
 
     @Override
-    public CommonResult uploadSingleFile(MultipartFile file) {
-        boolean uploaded = ossUtil.fileUpload(file,ossUtil.generateRandomName());
+    public String uploadSingleFile(MultipartFile file) {
+        String fileName = ossUtil.generateRandomName();
+        boolean uploaded = ossUtil.fileUpload(file,fileName);
         if (uploaded){
-            return CommonResult.success();
+            // 上传成功，返回文件名
+            return fileName;
         }
-        return CommonResult.failed(OSS_WRONG);
+        return null;
+    }
+    @Override
+    public String uploadMultiFile(MultipartFile[] files) {
+        String allFileNames = "";
+
+        for (MultipartFile file : files){
+            String fileName = ossUtil.generateRandomName();
+            boolean uploaded = ossUtil.fileUpload(file,fileName);
+            if (uploaded){
+                // 上传成功，返回文件名
+                allFileNames = allFileNames + fileName + SPLIT;
+                continue;
+            }
+            return null;
+        }
+        if (allFileNames.indexOf(SPLIT) != -1){
+            allFileNames = allFileNames.substring(0,allFileNames.length()-1);
+        }
+        return allFileNames;
+
     }
 }

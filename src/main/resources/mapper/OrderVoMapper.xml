@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.flik1337.vision.dao.OrderDao">
+    <resultMap id="orderVoMap" type="cn.flik1337.vision.vo.OrderVo">
+        <id column="film_order_id" jdbcType="INTEGER" property="filmOrder.filmOrderId" />
+        <association resultMap="cn.flik1337.vision.mbg.mapper.FilmOrderMapper.BaseResultMap"
+                     property="filmOrder">
+        </association>
+        <collection property="ticketList"  select="getTicketListByOrderNo" column="{orderNo =  film_order_id}">
+        </collection>
+    </resultMap>
+
+    <select id="getOrderVoByNo" resultMap="orderVoMap">
+        select film_order.*
+        from film_order
+        where film_order.film_order_id = #{orderNo}
+    </select>
+
+    <select id="getOrderVoListByUid" resultMap="orderVoMap">
+        select film_order.*
+        from film_order
+        where film_order.user_id = #{userId}
+        ORDER BY film_order.create_time desc
+    </select>
+
+    <select id="getTicketListByScheduleId" resultMap="cn.flik1337.vision.mbg.mapper.TicketMapper.BaseResultMap">
+        select ticket.* from ticket
+        where ticket.film_order_id in
+        (SELECT film_order.film_order_id from film_order where film_order.film_schedule_id = #{scheduleId})
+    </select>
+
+    <select id="getTicketListByOrderNo" resultMap="cn.flik1337.vision.mbg.mapper.TicketMapper.BaseResultMap">
+        select ticket.* from ticket
+        where ticket.film_order_id = #{orderNo}
+    </select>
+
+
+
+
+
+</mapper>

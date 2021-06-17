@@ -532,52 +532,62 @@ public class FilmExample {
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeEqualTo(Integer value) {
+        public Criteria andFilmTypeEqualTo(String value) {
             addCriterion("film_type =", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeNotEqualTo(Integer value) {
+        public Criteria andFilmTypeNotEqualTo(String value) {
             addCriterion("film_type <>", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeGreaterThan(Integer value) {
+        public Criteria andFilmTypeGreaterThan(String value) {
             addCriterion("film_type >", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFilmTypeGreaterThanOrEqualTo(String value) {
             addCriterion("film_type >=", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeLessThan(Integer value) {
+        public Criteria andFilmTypeLessThan(String value) {
             addCriterion("film_type <", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andFilmTypeLessThanOrEqualTo(String value) {
             addCriterion("film_type <=", value, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeIn(List<Integer> values) {
+        public Criteria andFilmTypeLike(String value) {
+            addCriterion("film_type like", value, "filmType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilmTypeNotLike(String value) {
+            addCriterion("film_type not like", value, "filmType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilmTypeIn(List<String> values) {
             addCriterion("film_type in", values, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeNotIn(List<Integer> values) {
+        public Criteria andFilmTypeNotIn(List<String> values) {
             addCriterion("film_type not in", values, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeBetween(Integer value1, Integer value2) {
+        public Criteria andFilmTypeBetween(String value1, String value2) {
             addCriterion("film_type between", value1, value2, "filmType");
             return (Criteria) this;
         }
 
-        public Criteria andFilmTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andFilmTypeNotBetween(String value1, String value2) {
             addCriterion("film_type not between", value1, value2, "filmType");
             return (Criteria) this;
         }
@@ -982,62 +992,52 @@ public class FilmExample {
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountEqualTo(String value) {
+        public Criteria andCommentCountEqualTo(Integer value) {
             addCriterion("comment_count =", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountNotEqualTo(String value) {
+        public Criteria andCommentCountNotEqualTo(Integer value) {
             addCriterion("comment_count <>", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountGreaterThan(String value) {
+        public Criteria andCommentCountGreaterThan(Integer value) {
             addCriterion("comment_count >", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountGreaterThanOrEqualTo(String value) {
+        public Criteria andCommentCountGreaterThanOrEqualTo(Integer value) {
             addCriterion("comment_count >=", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountLessThan(String value) {
+        public Criteria andCommentCountLessThan(Integer value) {
             addCriterion("comment_count <", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountLessThanOrEqualTo(String value) {
+        public Criteria andCommentCountLessThanOrEqualTo(Integer value) {
             addCriterion("comment_count <=", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountLike(String value) {
-            addCriterion("comment_count like", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountNotLike(String value) {
-            addCriterion("comment_count not like", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountIn(List<String> values) {
+        public Criteria andCommentCountIn(List<Integer> values) {
             addCriterion("comment_count in", values, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountNotIn(List<String> values) {
+        public Criteria andCommentCountNotIn(List<Integer> values) {
             addCriterion("comment_count not in", values, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountBetween(String value1, String value2) {
+        public Criteria andCommentCountBetween(Integer value1, Integer value2) {
             addCriterion("comment_count between", value1, value2, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountNotBetween(String value1, String value2) {
+        public Criteria andCommentCountNotBetween(Integer value1, Integer value2) {
             addCriterion("comment_count not between", value1, value2, "commentCount");
             return (Criteria) this;
         }

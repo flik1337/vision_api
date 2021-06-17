@@ -1,6 +1,7 @@
 package cn.flik1337.vision.common.utils;
 
 
+import cn.flik1337.vision.common.exception.Asserts;
 import cn.flik1337.vision.domain.FUserDetails;
 import cn.flik1337.vision.mbg.model.User;
 import io.jsonwebtoken.Claims;
@@ -25,6 +26,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static cn.flik1337.vision.common.api.ResultCode.FORBIDDEN;
+
 /**
  * JwtToken生成的工具类
  * JWT token的格式：header.payload.signature
@@ -37,7 +40,7 @@ import java.util.Map;
  * Created by macro on 2018/4/26.
  */
 
-@Component
+
 @ConfigurationProperties(prefix = "jwt")
 public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
@@ -75,8 +78,9 @@ public class JwtTokenUtil {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.info("JWT格式验证失败:{}",token);
+            //e.printStackTrace();
+            Asserts.fail(FORBIDDEN);
+            //  LOGGER.info("JWT格式验证失败:{}",token);
         }
         return claims;
     }
