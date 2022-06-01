@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.flik1337.vision.dao.FilmDao">
+    <resultMap id="BaseResultMap" type="cn.flik1337.vision.mbg.model.Film">
+        <id column="film_id" jdbcType="INTEGER" property="filmId" />
+        <result column="film_name" jdbcType="VARCHAR" property="filmName" />
+        <result column="release_time" jdbcType="DATE" property="releaseTime" />
+        <result column="off_time" jdbcType="DATE" property="offTime" />
+        <result column="director" jdbcType="VARCHAR" property="director" />
+        <result column="actor" jdbcType="VARCHAR" property="actor" />
+        <result column="film_type" jdbcType="VARCHAR" property="filmType" />
+        <result column="area" jdbcType="VARCHAR" property="area" />
+        <result column="producer" jdbcType="VARCHAR" property="producer" />
+        <result column="film_length" jdbcType="INTEGER" property="filmLength" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+        <result column="film_status" jdbcType="INTEGER" property="filmStatus" />
+        <result column="box_office" jdbcType="DOUBLE" property="boxOffice" />
+        <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+        <result column="score" jdbcType="DOUBLE" property="score" />
+    </resultMap>
+    <resultMap id="filmVoMap" type="cn.flik1337.vision.vo.FilmVo">
+        <id column="film_id" property="film.filmId"></id>
+        <association property="film" resultMap="cn.flik1337.vision.mbg.mapper.FilmMapper.BaseResultMap"></association>
+        <association property="filmBroadcast" resultMap="cn.flik1337.vision.mbg.mapper.FilmBroadcastMapper.BaseResultMap"></association>
+    </resultMap>
+
+    <resultMap id="filmDetailVo" type="cn.flik1337.vision.vo.FilmDetailVo">
+        <id column="film_id" jdbcType="INTEGER" property="film.filmId" />
+        <association property="film" resultMap="cn.flik1337.vision.mbg.mapper.FilmMapper.BaseResultMap" />
+        <association property="filmBroadcast" resultMap="cn.flik1337.vision.mbg.mapper.FilmBroadcastMapper.BaseResultMap"/>
+        <collection column="{ filmId = film_id}" property="commentVoList" javaType="java.util.ArrayList"  select="getCommentVoList"/>
+    </resultMap>
+
+    <resultMap id="commentVoMap" type="cn.flik1337.vision.vo.CommentVo">
+        <id column="film_comment_id" property="filmComment.filmId"></id>
+        <association property="filmComment" resultMap="cn.flik1337.vision.mbg.mapper.FilmCommentMapper.BaseResultMap"/>
+        <association property="user" resultMap="cn.flik1337.vision.mbg.mapper.UserMapper.BaseResultMap"/>
+     </resultMap>
+
+    <select id="getCinemaFilmList" resultType="cn.flik1337.vision.vo.FilmVo" resultMap="filmVoMap">
+        select f.*,fb.film_broadcast_id,fb.film_poster,fb.film_video from (film f)
+            left JOIN film_broadcast fb on f.film_id = fb.film_id
+            where not (f.film_status =  2) and  f.film_id in (
+                select fs.film_id from film_schedule  fs where ( not (fs.film_schedule_status = 1) and  fs.cinema_id = #{cinemaId} )
+        )
+    </select>
+
+    <select id="getFilmVoById" resultMap="filmVoMap">
+            select f.*,fb.film_broadcast_id,fb.film_poster,fb.film_video from (film f)
+            left JOIN film_broadcast fb on f.film_id = fb.film_id
+            where not (f.film_status =  2) and  f.film_id = #{filmId}
+    </select>
+
+    <select id="getAllFilmList" resultMap="filmVoMap">
+        select f.*,fb.film_broadcast_id,fb.film_poster,fb.film_video from (film f)
+            left JOIN film_broadcast fb on f.film_id = fb.film_id
+
+    </select>
+
+    <select id="getAllFilmTypes" resultMap="cn.flik1337.vision.mbg.mapper.FilmTypeMapper.BaseResultMap">
+        select * from film_type
+    </select>
+
+    <select id="getFilmDetail"  resultMap="filmDetailVo">
+        select f.* , fb.* from (film f)
+        left join film_broadcast fb  on ( fb.film_id = f.film_id )
+        where f.film_id = #{filmId}
+    </select>
+
+    <select id="getCommentVoList"  resultMap="commentVoMap">
+        select film_comment.* , `user`.user_id,`user`.user_name, `user`.gender,`user`.avatar from film_comment
+        left join `user` on `user`.user_id = film_comment.user_id
+        where film_comment.film_id = #{filmId}
+    </select>
+
+    <select id="countFilmComments" resultType="Integer">
+        select count(film_comment_id)  from film_comment
+        where film_id = #{filmId}
+    </select>
+</mapper>

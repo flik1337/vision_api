@@ -141,6 +141,12 @@
             <artifactId>javase</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <!--数据库表转word-->
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+            <version>1.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.flik1337.vision.dao.CinemaDao">
+    <select id="getCinemaMinPrice" resultType="cn.flik1337.vision.vo.CinemaPriceVo">
+    select min(film_schedule.price) as price,cinema.cinema_id as cinemaId
+    from film_schedule,cinema
+    where film_schedule.hall_id in (select hall_id from hall where hall.cinema_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    and cinema.cinema_id = hall.cinema_id)
+    GROUP BY cinema.cinema_id
+    ORDER BY price
+    </select>
+    <select id="getCinemaSpecList" resultMap="cn.flik1337.vision.mbg.mapper.CinemaSpecMapper.BaseResultMap">
+        select cinema_spec_id,cinema_spec_name from cinema_spec
+    </select>
+
+    <select id="getCinemaListWithFilm" resultMap="cn.flik1337.vision.mbg.mapper.CinemaMapper.BaseResultMap">
+        select cinema.* from cinema
+        where cinema.city like concat('%', #{cityName}, '%')
+        <if test="filmId != -1">
+            and cinema.cinema_id IN
+            (select film_schedule.cinema_id from film_schedule where film_schedule.film_id = #{filmId})
+        </if >
+        <if test="spec != '' and spec != null">
+            and cinema.special  like concat('%', #{spec}, '%')
+        </if >
+    </select>
+
+</mapper>
