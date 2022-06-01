@@ -1,9 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://49.234.122.86:3306/vision?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false
+    url: jdbc:mysql://urlxxxxx/databasename?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false
     username: vision
     password: vision
-#    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     serialization:
@@ -118,8 +117,8 @@ smsconfig:
 aliyun:
   oss:
     endpoint: oss-cn-shanghai.aliyuncs.com #oss-accelerate.aliyuncs.com # oss对外服务的访问域名
-    accessKeyId: LTAI4GCfqLSQt6XNxB1Lyy1F # 访问身份验证中用到用户标识
-    accessKeySecret: t5atKHAslOTD4IWZw8bk28nKxM5DMS # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    accessKeyId: x # 访问身份验证中用到用户标识
+    accessKeySecret: x # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
     bucketName: ziekoo-new # oss的存储空间
     policy:
       expire: 300 # 签名有效期(S)
@@ -130,21 +129,10 @@ aliyun:
 
 #极光推送
 jpush:
-  appKey: 955fffeddf405ef3540ccd44
-  masterKey: 063836ded1efaadc35b5702c
+  appKey: x
+  masterKey: x
 
 qiniu:
   bucketName: flik1337-blog
-  accessKey: nMED_cospE1W9CYhYBTwP-GI0150Gh8Mhm0vq_Zf
-  secretKey: 0fJs1ntpZygmAkF1gughSU6XXYHJRG0DwEG6_bsv
-
-#微信支付
-wx:
-  pay:
-    appId: wx3061f7f646d3d3fd    #微信公众号或者小程序等的appid
-    mchId: 1570496181 #微信支付商户号
-    #mchKey: 11ffa7af21524b24f78e2c5603a08766 #微信支付商户密钥  32FC453F00D44D09C5B493FB3D673A44
-    mchKey: 32FC453F00D44D09C5B493FB3D673A44
-    #subAppId: #服务商模式下的子商户公众账号ID
-    #subMchId: #服务商模式下的子商户号
-    keyPath: classpath:com/cloudrest/ziekoo/key/apiclient_cert.p12 #F:\ziekoo\apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+  accessKey: xx
+  secretKey: xx
